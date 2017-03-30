@@ -1,15 +1,14 @@
-package br.fpu.taw.controller.model;
+package br.fpu.taw.model;
 
 public class Mensagem {
 	private long id;
 	private String texto;
-	
+	private boolean teste;
+
 	public Mensagem() {
-		super();
 	}
 
-	public Mensagem(long id, String texto) {
-		super();
+	public Mensagem(long id, String texto, boolean teste) {
 		this.id = id;
 		this.texto = texto;
 	}
@@ -30,10 +29,17 @@ public class Mensagem {
 		this.texto = texto;
 	}
 
-	@Override
-	public String toString() {
-		return "Mensagem [id=" + id + ", texto=" + texto + "]";
+	public boolean isTeste() {
+		return teste;
 	}
 
-	
+	public void setTeste(boolean teste) {
+		this.teste = teste;
+	}
+
+	@Override
+	public String toString() {
+		return "Mensagem [id=" + id + ", texto=" + texto + ", teste=" + teste + "]";
+	}
+
 }
