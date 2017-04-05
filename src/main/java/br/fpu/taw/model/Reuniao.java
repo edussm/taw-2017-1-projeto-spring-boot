@@ -1,16 +1,12 @@
 package br.fpu.taw.model;
 
 import java.io.Serializable;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 
 @Entity
 public class Reuniao implements Serializable {
@@ -27,8 +23,9 @@ public class Reuniao implements Serializable {
 	@Column(nullable = false, length = 100)
 	private String objetivo;
 
-	@OneToMany(mappedBy = "id.reuniao", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private Set<ParticipacaoEscoteiro> participacaoEscoteiros;
+//	@OneToMany(mappedBy = "id.reuniao", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//	@Fetch( FetchMode.JOIN )
+//	private Set<ParticipacaoEscoteiro> participacaoEscoteiros;
 
 	public Long getId() {
 		return id;
@@ -54,14 +51,6 @@ public class Reuniao implements Serializable {
 		this.objetivo = objetivo;
 	}
 
-	public Set<ParticipacaoEscoteiro> getParticipacaoEscoteiros() {
-		return participacaoEscoteiros;
-	}
-
-	public void setParticipacaoEscoteiros(Set<ParticipacaoEscoteiro> participacaoEscoteiros) {
-		this.participacaoEscoteiros = participacaoEscoteiros;
-	}
-
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -71,8 +60,6 @@ public class Reuniao implements Serializable {
 		builder.append(tema);
 		builder.append(", objetivo=");
 		builder.append(objetivo);
-		builder.append(", participacaoEscoteiros=");
-		builder.append(participacaoEscoteiros);
 		builder.append("]");
 		return builder.toString();
 	}

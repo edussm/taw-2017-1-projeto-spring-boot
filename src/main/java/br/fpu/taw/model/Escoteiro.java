@@ -1,7 +1,6 @@
 package br.fpu.taw.model;
 
 import java.io.Serializable;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -10,7 +9,6 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 @Entity
 public class Escoteiro implements Serializable {
@@ -26,12 +24,9 @@ public class Escoteiro implements Serializable {
 	@Column(nullable = false, length = 100)
 	private String sobrenome;
 
-	@ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "patrulha_id", nullable = false, updatable = true)
 	private Patrulha patrulha;
-
-	@OneToMany(mappedBy = "id.escoteiro", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private Set<ParticipacaoEscoteiro> participacaoEscoteiro;
 
 	public String getRegistro() {
 		return registro;
@@ -65,14 +60,6 @@ public class Escoteiro implements Serializable {
 		this.patrulha = patrulha;
 	}
 
-	public Set<ParticipacaoEscoteiro> getParticipacaoEscoteiro() {
-		return participacaoEscoteiro;
-	}
-
-	public void setParticipacaoEscoteiro(Set<ParticipacaoEscoteiro> participacaoEscoteiro) {
-		this.participacaoEscoteiro = participacaoEscoteiro;
-	}
-
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -84,8 +71,6 @@ public class Escoteiro implements Serializable {
 		builder.append(sobrenome);
 		builder.append(", patrulha=");
 		builder.append(patrulha);
-		builder.append(", participacaoEscoteiro=");
-		builder.append(participacaoEscoteiro);
 		builder.append("]");
 		return builder.toString();
 	}
